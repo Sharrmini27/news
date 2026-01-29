@@ -1,4 +1,17 @@
 import streamlit as st
+import nltk
+
+# This block fixes the 'punkt' error on the server
+@st.cache_resource
+def download_nltk_resources():
+    try:
+        nltk.download('punkt')
+        nltk.download('punkt_tab')
+    except Exception as e:
+        st.error(f"Error downloading NLTK: {e}")
+
+download_nltk_resources()
+import streamlit as st
 from transformers import pipeline
 from newspaper import Article
 import nltk
